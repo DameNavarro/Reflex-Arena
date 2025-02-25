@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflex Arena | Gamer Training Platform</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #00b4ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #ff00c8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #111111;
+            border-bottom: 2px solid #ff00c8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #ff00c8, 0 0 20px #00b4ff;
+        }
+
+        .logo span {
+            color: #ff00c8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 0, 200, 0.2);
+        }
+
+        .login-btn {
+            background-color: #ff00c8;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #00b4ff;
+            color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('/api/placeholder/1200/600') center/cover no-repeat;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff00c8;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            background-color: #00b4ff;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #ff00c8;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 200, 0.4);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00b4ff;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            color: #cccccc;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background-color: #111111;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #333333;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 180, 255, 0.3);
+        }
+
+        .skill-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .skill-content {
+            padding: 20px;
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .skill-description {
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .skill-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: #00b4ff;
+            padding: 8px 16px;
+            border: 2px solid #00b4ff;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .skill-btn:hover {
+            background-color: #00b4ff;
+            color: #ffffff;
+        }
+
+        /* Game Section */
+        .game-section {
+            padding: 80px 0;
+            background-color: #0c0c0c;
+        }
+
+        .game-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #111111;
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid #333333;
+        }
+
+        .game-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00b4ff;
+        }
+
+        .game-area {
+            width: 100%;
+            height: 300px;
+            background-color: #222222;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .waiting {
+            background-color: #ad2121;
+        }
+
+        .go {
+            background-color: #1e8e3e;
+        }
+
+        .too-early {
+            background-color: #f1c40f;
+        }
+
+        .game-stats {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-box {
+            background-color: #222222;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .stat-title {
+            font-size: 0.9rem;
+            color: #cccccc;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .recent-results {
+            margin-top: 15px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .result-box {
+            background-color: #333333;
+            border-radius: 4px;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .game-instructions {
+            text-align: center;
+            margin-top: 20px;
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        /* Featured Games Section */
+        .featured-games {
+            padding: 80px 0;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background-color: #111111;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333333;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: #00b4ff;
+        }
+
+        .game-card-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .game-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff00c8;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .game-card-content {
+            padding: 20px;
+        }
+
+        .game-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .game-card-description {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .game-card-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #999999;
+            margin-bottom: 15px;
+        }
+
+        .play-btn {
+            display: block;
+            width: 100%;
+            background-color: #00b4ff;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            background-color: #ff00c8;
+            color: #ffffff;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('/api/placeholder/1200/400') center/cover no-repeat;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111111;
+            padding: 50px 0 20px;
+            border-top: 2px solid #00b4ff;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+        }
+
+        .footer-links a:hover {
+            color: #00b4ff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #222222;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #00b4ff;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333333;
+            padding-top: 20px;
+            color: #999999;
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Reflex<span>Arena</span></a>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#games">Games</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#about">About</a>
+                </div>
+                <a href="#" class="login-btn">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Train Like A Pro Gamer</h1>
+        <p>Improve your reaction time, puzzle solving, and critical thinking with our specialized training games designed for gamers.</p>
+        <a href="#games" class="cta-btn">Start Training</a>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Master Essential Gaming Skills</h2>
+            <p class="section-description">Our training platform focuses on three core skills that are crucial for competitive gaming performance.</p>
+            
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-image" style="background-image: url('/api/placeholder/400/200')"></div>
+                    <div class="skill-content">
+                        <h3 class="skill-title">Reaction Time</h3>
+                        <p class="skill-description">Lightning-fast reflexes can make the difference between victory and defeat. Train to reduce your reaction time with our specialized exercises.</p>
+                        <a href="#reaction-game" class="skill-btn">Train Now</a>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-image" style="background-image: url('/api/placeholder/400/200')"></div>
+                    <div class="skill-content">
+                        <h3 class="skill-title">Puzzle Solving</h3>
+                        <p class="skill-description">Enhance your ability to recognize patterns and solve complex problems quickly. Essential for strategy games and RPGs.</p>
+                        <a href="#" class="skill-btn">Train Now</a>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-image" style="background-image: url('/api/placeholder/400/200')"></div>
+                    <div class="skill-content">
+                        <h3 class="skill-title">Critical Thinking</h3>
+                        <p class="skill-description">Make better decisions under pressure. Our critical thinking exercises help you analyze situations faster and choose optimal strategies.</p>
+                        <a href="#" class="skill-btn">Train Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section - Reaction Time Test -->
+    <section class="game-section" id="reaction-game">
+        <div class="container">
+            <div class="game-container">
+                <h2 class="game-title">Reaction Time Test</h2>
+                
+                <div id="gameArea" class="game-area">
+                    Click to start
+                </div>
+                
+                <div class="game-stats">
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-title">Best Time</div>
+                            <div id="bestTime" class="stat-value">Not set</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-title">Average (last 5)</div>
+                            <div id="averageTime" class="stat-value">Not set</div>
+                        </div>
+                    </div>
+                    
+                    <div id="recentResultsContainer" class="recent-results" style="display: none;">
+                        <div class="stat-title">Recent Results</div>
+                        <div id="resultsGrid" class="results-grid">
+                            <!-- Results will be added here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-instructions">
+                    Click when the box turns green. Try to get the fastest time!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Games Section -->
+    <section class="featured-games" id="games">
+        <div class="container">
+            <h2 class="section-title">Featured Training Games</h2>
+            <p class="section-description">Choose from our collection of specialized training games, each designed to enhance a specific gaming skill.</p>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-card-image" style="background-image: url('/api/placeholder/400/200')">
+                        <div class="game-tag">Reaction</div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Color Switch</h3>
+                        <p class="game-card-description">React instantly when the color changes. Tests pure reaction speed with minimal distractions.</p>
+                        <div class="game-card-stats">
+                            <span>Avg. Time: 284ms</span>
+                            <span>Difficulty: Easy</span>
+                        </div>
+                        <a href="#reaction-game" class="play-btn">Play Now</a>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-card-image" style="background-image: url('/api/placeholder/400/200')">
+                        <div class="game-tag">Puzzle</div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Pattern Recognition</h3>
+                        <p class="game-card-description">Identify the next element in a sequence of shapes, colors, or numbers under time pressure.</p>
+                        <div class="game-card-stats">
+                            <span>Avg. Score: 18</span>
+                            <span>Difficulty: Medium</span>
+                        </div>
+                        <a href="#" class="play-btn">Play Now</a>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-card-image" style="background-image: url('/api/placeholder/400/200')">
+                        <div class="game-tag">Critical</div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Decision Trees</h3>
+                        <p class="game-card-description">Make rapid decisions based on changing conditions. Navigate branching paths with incomplete information.</p>
+                        <div class="game-card-stats">
+                            <span>Avg. Score: 23</span>
+                            <span>Difficulty: Hard</span>
+                        </div>
+                        <a href="#" class="play-btn">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Elevate Your Gaming Skills?</h2>
+                <p>Create an account to track your progress, compete on leaderboards, and unlock advanced training exercises.</p>
+                <a href="#" class="cta-btn">Sign Up Free</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Reflex Arena</h3>
+                    <p>The ultimate training platform for gamers who want to improve their core skills and dominate the competition.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">ig</a>
+                        <a href="#" class="social-icon">yt</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Games</h3>
+                    <ul class="footer-links">
+                        <li><a href="#reaction-game">Reaction Time Test</a></li>
+                        <li><a href="#">Color Switch</a></li>
+                        <li><a href="#">Pattern Recognition</a></li>
+                        <li><a href="#">Target Acquisition</a></li>
+                        <li><a href="#">Decision Trees</a></li>
+                        <li><a href="#">View All Games</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Reflex Arena. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Reaction Time Game -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game elements
+            const gameArea = document.getElementById('gameArea');
+            const bestTimeDisplay = document.getElementById('bestTime');
+            const averageTimeDisplay = document.getElementById('averageTime');
+            const recentResultsContainer = document.getElementById('recentResultsContainer');
+            const resultsGrid = document.getElementById('resultsGrid');
+            
+            // Game variables
+            let gameState = 'ready'; // ready, waiting, go, results
+            let startTime = 0;
+            let results = [];
+            let bestTime = null;
+            let waitTimeout;
+            
+            // Start the game
+            gameArea.addEventListener('click', function() {
+                if (gameState === 'ready' || gameState === 'results') {
+                    startGame();
+                } else if (gameState === 'waiting') {
+                    tooEarly();
+                } else if (gameState === 'go') {
+                    stopGame();
+                }
+            });
+            
+            function startGame() {
+                gameState = 'waiting';
+                gameArea.textContent = 'Wait for green...';
+                gameArea.className = 'game-area waiting';
+                
+                // Random wait time between 1 and 4 seconds
+                const waitTime = Math.floor(Math.random() * 3000) + 1000;
+                
+                waitTimeout = setTimeout(function() {
+                    gameState = 'go';
+                    gameArea.textContent = 'CLICK NOW!';
+                    gameArea.className = 'game-area go';
+                    startTime = Date.now();
+                }, waitTime);
+            }
+            
+            function tooEarly() {
+                clearTimeout(waitTimeout);
+                gameState = 'ready';
+                gameArea.textContent = 'Too early! Click to try again.';
+                gameArea.className = 'game-area too-early';
+            }
+            
+            function stopGame() {
+                const endTime = Date.now();
+                const reactionTime = endTime - startTime;
+                
+                // Update results
+                results.push(reactionTime);
+                if (results.length > 5) {
+                    results.shift(); // Keep only last 5 results
+                }
+                
+                // Update best time
+                if (bestTime === null || reactionTime < bestTime) {
+                    bestTime = reactionTime;
+                    bestTimeDisplay.textContent = bestTime + ' ms';
+                }
+                
+                // Update average time
+                const average = Math.round(results.reduce((sum, time) => sum + time, 0) / results.length);
+                averageTimeDisplay.textContent = average + ' ms';
+                
+                // Display rating
+                let rating = getReactionRating(reactionTime);
+                
+                // Update game area
+                gameState = 'results';
+                gameArea.innerHTML = `
+                    <div>${reactionTime} ms</div>
+                    <div>${rating}</div>
+                    <div style="font-size: 1rem; margin-top: 1rem;">Click to try again</div>
+                `;
+                gameArea.className = 'game-area';
+                
+                // Update recent results
+                updateRecentResults();
+            }
+            
+            function updateRecentResults() {
+                if (results.length > 0) {
+                    recentResultsContainer.style.display = 'block';
+                    resultsGrid.innerHTML = '';
+                    
+                    results.forEach(function(time) {
+                        const resultBox = document.createElement('div');
+                        resultBox.className = 'result-box';
+                        resultBox.textContent = time + ' ms';
+                        resultsGrid.appendChild(resultBox);
+                    });
+                }
+            }
+            
+            function getReactionRating(time) {
+                if (time < 150) return "Superhuman!";
+                if (time < 200) return "Incredible!";
+                if (time < 250) return "Excellent!";
+                if (time < 300) return "Very Good!";
+                if (time < 350) return "Good";
+                if (time < 400) return "Average";
+                if (time < 450) return "Decent";
+                if (time < 500) return "Room for improvement";
+                return "Keep practicing!";
+            }
+        });
+    </script>
+</body>
+</html>
